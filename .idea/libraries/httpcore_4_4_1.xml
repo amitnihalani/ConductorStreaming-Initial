@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="httpcore-4.4.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/Jars/httpcomponents-client-4.4.1/lib/httpcore-4.4.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Jars/httpcomponents-client-4.4.1/lib/httpclient-cache-4.4.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Jars/httpcomponents-client-4.4.1/lib/httpclient-4.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

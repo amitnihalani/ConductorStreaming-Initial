@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="io.reactivex:rxnetty:0.4.6" type="repository">
+    <properties maven-id="io.reactivex:rxnetty:0.4.6" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/reactivex/rxnetty/0.4.6/rxnetty-0.4.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava/1.0.5/rxjava-1.0.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.0.25.Final/netty-codec-http-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec/4.0.25.Final/netty-codec-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport/4.0.25.Final/netty-transport-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-buffer/4.0.25.Final/netty-buffer-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-common/4.0.25.Final/netty-common-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-handler/4.0.25.Final/netty-handler-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-epoll/4.0.25.Final/netty-transport-native-epoll-4.0.25.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

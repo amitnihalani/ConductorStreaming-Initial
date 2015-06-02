@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="commons-codec-1.92">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/Jars/httpcomponents-client-4.4.1/lib/commons-codec-1.9.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Jars/httpcomponents-client-4.4.1/lib/httpclient-cache-4.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
