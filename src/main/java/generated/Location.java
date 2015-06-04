@@ -1,4 +1,4 @@
-package generated.json.classes;
+package generated;
 
 import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang.builder.EqualsBuilder;

@@ -1,4 +1,6 @@
 package sql;
+import generated.Location;
+
 import java.sql.*;
 /**
  * Created by anihalani on 5/29/15.
@@ -12,29 +14,23 @@ public class JDBCConnection {
     static final String USER = "root";
     static final String PASS = "";
 
-    public static void main(String[] args) {
-        Connection conn = null;
-        Statement stmt = null;
+    public static Connection conn = null;
+    public static Statement stmt = null;
+
+    public static Statement setup() {
+
         try{
             //STEP 2: Register JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
+           Class.forName("com.mysql.jdbc.Driver");
 
 
             //STEP 3: Open a connection
             //System.out.println("Connecting to a selected database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+            return conn.createStatement();
             //System.out.println("Connected database successfully...");
 
-            // Reading from Database - Table: locale
-           // PrintTable(conn, stmt, "locale");
 
-            //STEP 4: Execute a query
-            System.out.println("Inserting records into the table...");
-
-            String sql = "INSERT INTO locale (description, country, state, city, locode) " +
-                    "values ('testDescription', 'testCountry', NULL, NULL, 'Test1');";
-            stmt.executeUpdate(sql);
 
         }catch(SQLException se){
             //Handle errors for JDBC
@@ -42,21 +38,9 @@ public class JDBCConnection {
         }catch(Exception e){
             //Handle errors for Class.forName
             e.printStackTrace();
-        }finally{
-            //finally block used to close resources
-            try{
-                if(stmt!=null)
-                    conn.close();
-            }catch(SQLException se){
-            }// do nothing
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }//end finally try
-        }//end try
+        }
         System.out.println("Goodbye!");
+        return null;
     }//end main
 
     private static void PrintTable(Connection conn, Statement stmt, String tableName){
@@ -79,6 +63,36 @@ public class JDBCConnection {
 
         System.out.println("Read records from the table...");
         System.out.println("Local_ID Description Country State City Locode");
+    }
+
+    public static void WriteToTable(String tableName, Location location){
+        stmt = setup();
+        //STEP 4: Execute a query
+        //System.out.println("Inserting records into the table...");
+
+        String sql = "INSERT INTO "+tableName+"  (description) " +
+                "values ('"+location.getDescription()+"');";
+
+        if (stmt != null) {
+            try {
+                stmt.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally{
+                //finally block used to close resources
+                try{
+                    if(stmt!=null)
+                        conn.close();
+                }catch(SQLException se){
+                }// do nothing
+                try{
+                    if(conn!=null)
+                        conn.close();
+                }catch(SQLException se){
+                    se.printStackTrace();
+                }//end finally try
+            }//end try
+        }
     }
 
 }//end JDBCExample
