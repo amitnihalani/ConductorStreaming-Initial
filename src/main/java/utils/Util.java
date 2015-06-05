@@ -13,12 +13,12 @@ import java.util.Properties;
 /**
  * Miscellaneous utilities used by the reco client.
  *
- * @author vvakar
- *         Date: 4/3/15
+ * @author anihalani
+ *
  */
 public class Util {
-    public static final String PROPS_FILE = "conductor.properties";
-    public static final String APIKEY_KEY = "spahamol3dutfzucdgxm4k0j2e721b1q3gi381hw", SHARED_SECRET_KEY = "18u41qj1x2o9j60qwnbwxkhfl2pho2lqnwj93tdh";
+    public static final String PROPS_FILE = "conductorAPI.properties";
+//    public static final String APIKEY_KEY = "", SHARED_SECRET_KEY = "";
     public static final String URL_RECOMM_ENGINE_KEY = "recoEngineUrl";
     public static final String APPLICATION_HTML = "text/html";
     public static final String PATH_PROCESSOR = "/bin/ready/conductor-getrecomm";
@@ -45,16 +45,20 @@ public class Util {
                 } catch(IOException e) { /* ignore */ }
             }
         }
-
         return properties;
     }
 
     /**
-     * Given a base reco service url and an {@code apiKey} and {@code sharedSecret}, generate signed reco service url.
+     * Given a base api end point url and an {@code apiKey} and {@code sharedSecret}, generate signed api end point url.
      */
-    public static String generateRecoServiceUrl(final String recoEngineUrl, final String apiKey, final String sharedSecret) {
+    public static String generateRecoServiceUrl(final String apiEndpointUrl) {
         try {
-            return recoEngineUrl + "?apiKey=" + apiKey + "&sig=" + generateSignature(apiKey, sharedSecret);
+            Properties properties = readProperties(PROPS_FILE);
+            return apiEndpointUrl
+                    + "?apiKey="
+                    + properties.getProperty("API_KEY")
+                    + "&sig="
+                    + generateSignature(properties.getProperty("API_KEY"), properties.getProperty("SHARED_SECRET"));
         } catch (NoSuchAlgorithmException e) {
             // nothing we can do about this
             throw new RuntimeException(e);

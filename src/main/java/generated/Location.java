@@ -120,6 +120,10 @@ public class Location {
                 .append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
+    /**
+     * Writes the values in the location object to the 'locale' table in the local database
+     * @throws Exception - if connection is null
+     */
     public void writeToDatabase() throws Exception {
         Connection conn = JDBCConnection.getConnection();
         if (conn==null)

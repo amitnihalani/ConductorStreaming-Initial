@@ -2,16 +2,12 @@ package streaming;
 
 import utils.Util;
 
-// import org.json.JSONObject;
-
 /**
  * Created by anihalani on 5/31/15.
  */
 public class APIPathBuilder {
     private String baseUrl;
     private String endpointParameter;
-    private final String apiKey = "obwijyt9sjplrzwk8c9nrmb276tk5cyym9orp1l4";
-    private final String sharedSecret = "fgoser9zll8luygcahg5tdb8ngqur682z0mdk4gx";
 
     private APIPathBuilder(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -33,11 +29,15 @@ public class APIPathBuilder {
         return this;
     }
 
+    /**
+     * Builds and return a complete url including the api baseUrl, endpoint paramter, apiKey and the Shared secret
+     * @return
+     */
     public String build() {
         StringBuilder builder = new StringBuilder(baseUrl);
         builder.append("/v3/");
         builder.append(endpointParameter);
-        return Util.generateRecoServiceUrl(builder.toString(), apiKey, sharedSecret);
+        return Util.generateRecoServiceUrl(builder.toString());
 
     }
 
