@@ -17,21 +17,17 @@ public class JDBCConnection {
     public static Connection conn = null;
     public static Statement stmt = null;
 
-    public static Statement setup() {
+    /**
+     * Method to cteate a JDBC connection and return it.
+     * @return  JDBC Connection
+     */
+    public static Connection getConnection() {
 
         try{
             //STEP 2: Register JDBC driver
            Class.forName("com.mysql.jdbc.Driver");
-
-
             //STEP 3: Open a connection
-            //System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            return conn.createStatement();
-            //System.out.println("Connected database successfully...");
-
-
-
+            return DriverManager.getConnection(DB_URL, USER, PASS);
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -39,9 +35,8 @@ public class JDBCConnection {
             //Handle errors for Class.forName
             e.printStackTrace();
         }
-        System.out.println("Goodbye!");
         return null;
-    }//end main
+    }
 
     private static void PrintTable(Connection conn, Statement stmt, String tableName){
         ResultSet rs = null;
@@ -66,7 +61,7 @@ public class JDBCConnection {
     }
 
     public static void WriteToTable(String tableName, Location location){
-        stmt = setup();
+        conn = getConnection();
         //STEP 4: Execute a query
         //System.out.println("Inserting records into the table...");
 

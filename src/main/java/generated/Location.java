@@ -4,17 +4,18 @@ import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import sql.JDBCConnection;
 
 import javax.annotation.Generated;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({
-        "locationId",
-        "description"
-})
+@JsonPropertyOrder({ "locationId", "description" })
 public class Location {
 
     @JsonProperty("locationId")
@@ -24,19 +25,18 @@ public class Location {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public Location(){
+    public Location() {
 
     }
 
-    public Location(String locId, String desc){
-        this.locationId = locId;
-        this.description = desc;
+    public Location(String locationId, String description) {
+        this.locationId = locationId;
+        this.description = description;
     }
 
     /**
      *
-     * @return
-     * The locationId
+     * @return The locationId
      */
     @JsonProperty("locationId")
     public String getLocationId() {
@@ -46,7 +46,7 @@ public class Location {
     /**
      *
      * @param locationId
-     * The locationId
+     *            The locationId
      */
     @JsonProperty("locationId")
     public void setLocationId(String locationId) {
@@ -60,8 +60,7 @@ public class Location {
 
     /**
      *
-     * @return
-     * The description
+     * @return The description
      */
     @JsonProperty("description")
     public String getDescription() {
@@ -71,7 +70,7 @@ public class Location {
     /**
      *
      * @param description
-     * The description
+     *            The description
      */
     @JsonProperty("description")
     public void setDescription(String description) {
@@ -117,8 +116,36 @@ public class Location {
             return false;
         }
         Location rhs = ((Location) other);
-        return new EqualsBuilder().append(locationId, rhs.locationId).append(description, rhs.description).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(locationId, rhs.locationId).append(description, rhs.description)
+                .append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
-}
+    public void writeToDatabase() throws Exception {
+        Connection conn = JDBCConnection.getConnection();
+        if (conn==null)
+            throw new Exception("Connection not successful!");
+        // Execute a query
+        // the mysql insert statement
+        String query = " insert into locale (locale_id, description)" + " values (?, ?)";
 
+        // create the mysql insert preparedstatement
+        PreparedStatement preparedStmt = null;
+        try {
+            preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, this.getLocationId());
+            preparedStmt.setString(2, this.getDescription());
+            // execute the preparedstatement
+            preparedStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                System.err.println("Error in closing connection!");
+                e.printStackTrace();
+            }
+        }
+    }
+}
