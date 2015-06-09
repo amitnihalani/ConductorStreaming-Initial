@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="org.apache.httpcore:com.springsource.org.apache.httpcomponents.httpcore:4.1" type="repository">
-    <properties maven-id="org.apache.httpcore:com.springsource.org.apache.httpcomponents.httpcore:4.1" />
-    <CLASSES />
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
