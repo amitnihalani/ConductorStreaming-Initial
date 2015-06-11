@@ -75,4 +75,18 @@ public class Util {
         return hexEncoded;
     }
 
+    public static String generateServiceUrlForWebProperties(final String apiEndpointUrl){
+        try {
+            Properties properties = readProperties(PROPS_FILE);
+            return apiEndpointUrl
+                    + "?apiKey="
+                    + properties.getProperty("API_KEY")
+                    + "&sig="
+                    + generateSignature(properties.getProperty("API_KEY"), properties.getProperty("SHARED_SECRET"));
+        } catch (NoSuchAlgorithmException e) {
+            // nothing we can do about this
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -17,8 +17,10 @@ public class DeviceDAO {
      */
     public static void writeToDatabase(Device device) throws Exception {
         Connection conn = JDBCConnection.getConnection();
-        if (conn==null)
+        if (conn==null){
             throw new Exception("Connection not successful!");
+        }
+
         // Execute a query
         // the mysql insert statement
         String query = "insert into device (device_id, description) values (?, ?)";
@@ -35,8 +37,9 @@ public class DeviceDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (conn != null)
+                if (conn != null){
                     conn.close();
+                }
             } catch (SQLException e) {
                 System.err.println("Error in closing connection!");
                 e.printStackTrace();

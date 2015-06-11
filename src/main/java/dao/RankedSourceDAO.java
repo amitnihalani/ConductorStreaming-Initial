@@ -17,8 +17,10 @@ public class RankedSourceDAO {
      */
     public static void writeToDatabase(RankSource rankSource) throws Exception {
         Connection conn = JDBCConnection.getConnection();
-        if (conn==null)
+        if (conn==null){
             throw new Exception("Connection not successful!");
+        }
+
         // Execute a query
         // the mysql insert statement
         String query = "insert into rank_source (rank_source_id, base_url, description, name) values (?, ?, ?, ?)";
@@ -37,8 +39,9 @@ public class RankedSourceDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (conn != null)
+                if (conn != null){
                     conn.close();
+                }
             } catch (SQLException e) {
                 System.err.println("Error in closing connection!");
                 e.printStackTrace();
