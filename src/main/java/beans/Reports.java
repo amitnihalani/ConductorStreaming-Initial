@@ -6,10 +6,7 @@ package beans;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-@JsonPropertyOrder({
-        "Current"
-})
+@JsonPropertyOrder({ "Current" })
 public class Reports {
 
     @JsonProperty("CURRENT")
@@ -17,8 +14,7 @@ public class Reports {
 
     /**
      *
-     * @return
-     * The Current
+     * @return The Current
      */
     @JsonProperty("CURRENT")
     public beans.Current getCurrent() {
@@ -28,7 +24,7 @@ public class Reports {
     /**
      *
      * @param current
-     * The Current
+     *            The Current
      */
     @JsonProperty("CURRENT")
     public void setCurrent(beans.Current current) {

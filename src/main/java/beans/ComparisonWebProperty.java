@@ -1,4 +1,5 @@
 package beans;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -6,11 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * Created by anihalani on 6/9/15.
  */
 
-@JsonPropertyOrder({
-        "label",
-        "name",
-        "webPropertyId"
-})
+@JsonPropertyOrder({ "label", "name", "webPropertyId" })
 public class ComparisonWebProperty {
 
     @JsonProperty("label")
@@ -20,10 +17,28 @@ public class ComparisonWebProperty {
     @JsonProperty("webPropertyId")
     private int webPropertyId;
 
+    private int accountId;
+
+    /**
+     * Getter for AccountId
+     * @return the account id associated with the current associated web property
+     */
+    public int getAccountId() {
+        return accountId;
+    }
+
+    /**
+     * Setter for Account Id
+     * @param accountId - the account id for the comparison web property
+     */
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+
     /**
      *
-     * @return
-     * The label
+     * @return The label
      */
     @JsonProperty("label")
     public String getLabel() {
@@ -33,7 +48,7 @@ public class ComparisonWebProperty {
     /**
      *
      * @param label
-     * The label
+     *            The label
      */
     @JsonProperty("label")
     public void setLabel(String label) {
@@ -47,8 +62,7 @@ public class ComparisonWebProperty {
 
     /**
      *
-     * @return
-     * The name
+     * @return The name
      */
     @JsonProperty("name")
     public String getName() {
@@ -58,7 +72,7 @@ public class ComparisonWebProperty {
     /**
      *
      * @param name
-     * The name
+     *            The name
      */
     @JsonProperty("name")
     public void setName(String name) {
@@ -72,8 +86,7 @@ public class ComparisonWebProperty {
 
     /**
      *
-     * @return
-     * The webPropertyId
+     * @return The webPropertyId
      */
     @JsonProperty("webPropertyId")
     public int getWebPropertyId() {
@@ -83,7 +96,7 @@ public class ComparisonWebProperty {
     /**
      *
      * @param webPropertyId
-     * The webPropertyId
+     *            The webPropertyId
      */
     @JsonProperty("webPropertyId")
     public void setWebPropertyId(int webPropertyId) {
@@ -97,13 +110,17 @@ public class ComparisonWebProperty {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         ComparisonWebProperty that = (ComparisonWebProperty) o;
 
-        if (webPropertyId != that.webPropertyId) return false;
-        if (label != null ? !label.equals(that.label) : that.label != null) return false;
+        if (webPropertyId != that.webPropertyId)
+            return false;
+        if (label != null ? !label.equals(that.label) : that.label != null)
+            return false;
         return name.equals(that.name);
 
     }

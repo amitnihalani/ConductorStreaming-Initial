@@ -75,6 +75,11 @@ public class Util {
         return hexEncoded;
     }
 
+    /**
+     *Generates the final service url by concatenating all the required parameters
+     * @param apiEndpointUrl - the Conductor base API url + the endpoint parameter
+     * @return - the complete url with the API key and signature
+     */
     public static String generateServiceUrlForWebProperties(final String apiEndpointUrl){
         try {
             Properties properties = readProperties(PROPS_FILE);
