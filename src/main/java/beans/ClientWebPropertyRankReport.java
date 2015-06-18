@@ -44,11 +44,6 @@ public class ClientWebPropertyRankReport {
         this.ranks = ranks;
     }
 
-    public ClientWebPropertyRankReport withRanks(Ranks ranks) {
-        this.ranks = ranks;
-        return this;
-    }
-
     /**
      *
      * @return The webPropertyId
@@ -66,11 +61,6 @@ public class ClientWebPropertyRankReport {
     @JsonProperty("webPropertyId")
     public void setWebPropertyId(long webPropertyId) {
         this.webPropertyId = webPropertyId;
-    }
-
-    public ClientWebPropertyRankReport withWebPropertyId(long webPropertyId) {
-        this.webPropertyId = webPropertyId;
-        return this;
     }
 
     /**
@@ -92,11 +82,6 @@ public class ClientWebPropertyRankReport {
         this.trackedSearchId = trackedSearchId;
     }
 
-    public ClientWebPropertyRankReport withTrackedSearchId(long trackedSearchId) {
-        this.trackedSearchId = trackedSearchId;
-        return this;
-    }
-
     /**
      *
      * @return The itemType
@@ -114,11 +99,6 @@ public class ClientWebPropertyRankReport {
     @JsonProperty("itemType")
     public void setItemType(String itemType) {
         this.itemType = itemType;
-    }
-
-    public ClientWebPropertyRankReport withItemType(String itemType) {
-        this.itemType = itemType;
-        return this;
     }
 
     /**
@@ -140,11 +120,6 @@ public class ClientWebPropertyRankReport {
         this.target = target;
     }
 
-    public ClientWebPropertyRankReport withTarget(String target) {
-        this.target = target;
-        return this;
-    }
-
     /**
      *
      * @return The targetDomainName
@@ -162,11 +137,6 @@ public class ClientWebPropertyRankReport {
     @JsonProperty("targetDomainName")
     public void setTargetDomainName(String targetDomainName) {
         this.targetDomainName = targetDomainName;
-    }
-
-    public ClientWebPropertyRankReport withTargetDomainName(String targetDomainName) {
-        this.targetDomainName = targetDomainName;
-        return this;
     }
 
     /**
@@ -188,17 +158,7 @@ public class ClientWebPropertyRankReport {
         this.targetUrl = targetUrl;
     }
 
-    public ClientWebPropertyRankReport withTargetUrl(String targetUrl) {
-        this.targetUrl = targetUrl;
-        return this;
-    }
-
-
-    @JsonPropertyOrder({
-            "UNIVERSAL_RANK",
-            "TRUE_RANK",
-            "CLASSIC_RANK"
-    })
+    @JsonPropertyOrder({ "UNIVERSAL_RANK", "TRUE_RANK", "CLASSIC_RANK" })
     public class Ranks {
 
         @JsonProperty("UNIVERSAL_RANK")
@@ -210,8 +170,7 @@ public class ClientWebPropertyRankReport {
 
         /**
          *
-         * @return
-         * The UNIVERSALRANK
+         * @return The UNIVERSALRANK
          */
         @JsonProperty("UNIVERSAL_RANK")
         public long getUNIVERSALRANK() {
@@ -221,22 +180,16 @@ public class ClientWebPropertyRankReport {
         /**
          *
          * @param UNIVERSALRANK
-         * The UNIVERSAL_RANK
+         *            The UNIVERSAL_RANK
          */
         @JsonProperty("UNIVERSAL_RANK")
         public void setUNIVERSALRANK(long UNIVERSALRANK) {
             this.UNIVERSALRANK = UNIVERSALRANK;
         }
 
-        public Ranks withUNIVERSALRANK(long UNIVERSALRANK) {
-            this.UNIVERSALRANK = UNIVERSALRANK;
-            return this;
-        }
-
         /**
          *
-         * @return
-         * The TRUERANK
+         * @return The TRUERANK
          */
         @JsonProperty("TRUE_RANK")
         public long getTRUERANK() {
@@ -246,22 +199,16 @@ public class ClientWebPropertyRankReport {
         /**
          *
          * @param TRUERANK
-         * The TRUE_RANK
+         *            The TRUE_RANK
          */
         @JsonProperty("TRUE_RANK")
         public void setTRUERANK(long TRUERANK) {
             this.TRUERANK = TRUERANK;
         }
 
-        public Ranks withTRUERANK(long TRUERANK) {
-            this.TRUERANK = TRUERANK;
-            return this;
-        }
-
         /**
          *
-         * @return
-         * The CLASSICRANK
+         * @return The CLASSICRANK
          */
         @JsonProperty("CLASSIC_RANK")
         public long getCLASSICRANK() {
@@ -271,16 +218,11 @@ public class ClientWebPropertyRankReport {
         /**
          *
          * @param CLASSICRANK
-         * The CLASSIC_RANK
+         *            The CLASSIC_RANK
          */
         @JsonProperty("CLASSIC_RANK")
         public void setCLASSICRANK(long CLASSICRANK) {
             this.CLASSICRANK = CLASSICRANK;
-        }
-
-        public Ranks withCLASSICRANK(long CLASSICRANK) {
-            this.CLASSICRANK = CLASSICRANK;
-            return this;
         }
     }
 }
