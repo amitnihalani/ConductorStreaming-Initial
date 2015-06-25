@@ -11,6 +11,7 @@ import java.io.InputStream;
 
 /**
  * Created by anihalani on 6/5/15.
+ * STreamBuilder class to build the Input Stream from a given URL
  */
 public class StreamBuilder {
 
@@ -25,7 +26,7 @@ public class StreamBuilder {
 
     /**
      * Sets the inputStream property of class StreamBuilder
-     * 
+     *
      * @param instream
      *            - the input stream to read from
      */
@@ -60,7 +61,7 @@ public class StreamBuilder {
 
         } catch (IOException e) {
             System.out.println("Error in StreamBuilder.buildInStream");
-            throw new RuntimeException(String.format("Unable to create InputStream from API \n %s", e.getStackTrace()));
+            throw new RuntimeException(String.format("Unable to create InputStream from API \n %s", e));
         }
     }
 }

@@ -7,6 +7,7 @@ import java.sql.*;
 
 /**
  * Created by anihalani on 6/9/15.
+ * DAO class to handle database interactions
  */
 public class DAO {
 
@@ -225,7 +226,7 @@ public class DAO {
 
         PreparedStatement preparedStmt = conn.prepareStatement(query);
         preparedStmt.setInt(1, trackedSearch.getTrackedSearchId());
-        preparedStmt.setInt(2, (trackedSearch.isIsActive()==true ? 1:2));
+        preparedStmt.setInt(2, (trackedSearch.getActive()==true ? 1:2));
         preparedStmt.setString(3, trackedSearch.getPreferredUrl());
         preparedStmt.setString(4, trackedSearch.getQueryPhrase());
         preparedStmt.setInt(5, trackedSearch.getLocationId());

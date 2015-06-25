@@ -10,18 +10,16 @@ import streaming.APIPathBuilder;
 import streaming.StreamBuilder;
 import utils.Util;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Created by anihalani on 6/9/15.
+ * Created by anihalani on 6/9/15. DataDumper class to stream endpoint data and interact with DAO
  */
 public class APIDataDumper {
 
-    private String baseUrl;
     private static final String ENDPOINT_ACCOUNTS = "accounts";
     private static final String ENDPOINT_LOCATIONS = "locations";
     private static final String ENDPOINT_RANK_SOURCES = "rank-sources";
@@ -50,17 +48,8 @@ public class APIDataDumper {
     }
 
     /**
-     * StreamBuilder Getter
-     * 
-     * @return - the stream builder instance
-     */
-    public StreamBuilder getStreamBuilder() {
-        return streamBuilder;
-    }
-
-    /**
      * StreamBuilder Setter
-     * 
+     *
      * @param streamBuilder
      *            - the streamBuilder instance to be set to
      */
@@ -70,20 +59,19 @@ public class APIDataDumper {
 
     /**
      * Constructor to create an instance of API Path Builder
-     * 
+     *
      * @param url
      *            - The Conductor API baseUrl
      */
     public APIDataDumper(String url) {
-        this.baseUrl = url;
-        pathBuilder = new APIPathBuilder(baseUrl);
+        pathBuilder = new APIPathBuilder(url);
         dao = new DAO();
         streamBuilder = new StreamBuilder();
     }
 
     /**
      * Sets the APIPathBuilder property for the class
-     * 
+     *
      * @param pathBuilder
      *            - The APIPathBuilder instance
      */
@@ -146,7 +134,7 @@ public class APIDataDumper {
      * Gets the Tracked Search data returned from the API endpoint
      */
     public void writeTrackedSearchData(String urlWithoutSig) {
-        if (urlWithoutSig != null && urlWithoutSig != "") {
+        if (urlWithoutSig != null && !urlWithoutSig.equals("")) {
             String trackedSearchUrl = pathBuilder.addKeyAndSignature(urlWithoutSig);
             writeObjects(trackedSearchUrl, TrackedSearch.class);
         }
@@ -191,7 +179,6 @@ public class APIDataDumper {
             try {
                 if (rs != null) {
                     rs.close();
-                    // rs.getStatement().close();
                 }
             } catch (SQLException e) {
                 System.out.println("Error while closing ResultSet/Statement in getWebPropertyDataReport");
@@ -243,7 +230,6 @@ public class APIDataDumper {
         } catch (Exception e) {
             System.out.println("Error in writeObjects");
             System.out.println(url);
-            e.printStackTrace();
         } finally {
             try {
                 if (instream != null) {
@@ -251,7 +237,6 @@ public class APIDataDumper {
                 }
             } catch (IOException e) {
                 System.out.println("Error while closing stream in writeObjects");
-                System.out.println(url);
                 e.printStackTrace();
             }
         }

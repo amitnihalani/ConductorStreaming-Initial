@@ -22,13 +22,14 @@ import static org.mockito.Mockito.*;
 
 /**
  * Created by anihalani on 6/10/15.
+ * Tests for APIDataDumper
  */
 public class APIDataDumperTest {
 
     @Mock
     DAO dao;
     @Mock
-    StreamBuilder strmBuilder;
+    StreamBuilder streamBuilder;
     @Mock
     InputStream ipStream;
     @Mock
@@ -45,7 +46,7 @@ public class APIDataDumperTest {
         MockitoAnnotations.initMocks(this);
         dataDumper = new APIDataDumper("https://api.conductor.com");
         dataDumper.setDao(dao);
-        dataDumper.setStreamBuilder(strmBuilder);
+        dataDumper.setStreamBuilder(streamBuilder);
 
     }
 
@@ -68,7 +69,7 @@ public class APIDataDumperTest {
     @Test
     public void verifyInteractionsWithGetLocationData() throws Exception {
         // create method stub
-        when(strmBuilder.buildInStream(anyString())).thenReturn(
+        when(streamBuilder.buildInStream(anyString())).thenReturn(
                 IOUtils.toInputStream("[{\n" + "    \"locationId\": \"1\",\n"
                         + "    \"description\": \"United States\"\n" + "}, {\n" + "    \"locationId\": \"2\",\n"
                         + "    \"description\": \"Canada\"\n" + "}]"));
@@ -88,7 +89,7 @@ public class APIDataDumperTest {
     @Test
     public void verifyInteractionsWithGetDeviceData() throws Exception {
         // create method stub
-        when(strmBuilder.buildInStream(anyString())).thenReturn(
+        when(streamBuilder.buildInStream(anyString())).thenReturn(
                 IOUtils.toInputStream("[{\n" + "    \"description\": \"Desktop\",\n" + "    \"deviceId\": \"1\"\n"
                         + "}, {\n" + "    \"description\": \"Smartphone\",\n" + "    \"deviceId\": \"2\"\n" + "}, {\n"
                         + "    \"description\": \"Tablet\",\n" + "    \"deviceId\": \"3\"\n" + "}]"));
@@ -111,7 +112,7 @@ public class APIDataDumperTest {
     @Test
     public void verifyInteractionsWithGetRankSourceData() throws Exception {
         // create method stub
-        when(strmBuilder.buildInStream(anyString())).thenReturn(
+        when(streamBuilder.buildInStream(anyString())).thenReturn(
                 IOUtils.toInputStream("[{\n" + "    \"baseDomain\": \"google.com\",\n"
                         + "    \"description\": \"Google (US / English)\",\n" + "    \"rankSourceId\": \"1\",\n"
                         + "    \"name\": \"GOOGLE_EN_US\"\n" + "}, {\n" + "    \"baseDomain\": \"google.ca\",\n"
@@ -141,7 +142,7 @@ public class APIDataDumperTest {
     @Test
     public void verifyInteractionsWithGetWebProperty() throws Exception {
         // create method stub
-        when(strmBuilder.buildInStream(contains("web-properties?apiKey")))
+        when(streamBuilder.buildInStream(contains("web-properties?apiKey")))
                 .thenReturn(
                         IOUtils.toInputStream("[{\n"
                                 + "    \"isActive\": true,\n"
@@ -150,7 +151,7 @@ public class APIDataDumperTest {
                                 + "    \"trackedSearchList\": \"https://api.conductor.com/v3/accounts/3/web-properties/7/tracked-searches\",\n"
                                 + "    \"name\": \"adirondackchairs.com\"\n" + "}]"));
 
-        when(strmBuilder.buildInStream(contains("tracked-searches"))).thenReturn(
+        when(streamBuilder.buildInStream(contains("tracked-searches"))).thenReturn(
                 IOUtils.toInputStream("[{\n" + "    \"isActive\": true,\n" + "    \"trackedSearchId\": \"4576447\",\n"
                         + "    \"preferredUrl\": null,\n" + "    \"queryPhrase\": \"ADIRONDACK CHAIRS\",\n"
                         + "    \"locationId\": \"1\",\n" + "    \"rankSourceId\": \"1\",\n"
@@ -188,7 +189,7 @@ public class APIDataDumperTest {
     public void verifyInteractionsWithGetWebPropertyRankReport() throws Exception {
         when(dao.getRankSourceIdsFromTrackedSearch()).thenReturn(getMockResultSet());
         // create method stub
-        when(strmBuilder.buildInStream(contains("/rank-sources/")))
+        when(streamBuilder.buildInStream(contains("/rank-sources/")))
                 .thenReturn(
                         IOUtils.toInputStream("[{\n"
                                 + "    \"ranks\": {\n"
@@ -240,9 +241,9 @@ public class APIDataDumperTest {
         headers.add("web_property_id");
         headers.add("rank_source_id");
 
-        List<List<Object>> data = new ArrayList<List<Object>>();
+        List<List<Object>> data = new ArrayList<>();
 
-        List<Object> objects = new ArrayList<Object>();
+        List<Object> objects = new ArrayList<>();
         objects.add(3);
         objects.add(7);
         objects.add(1);

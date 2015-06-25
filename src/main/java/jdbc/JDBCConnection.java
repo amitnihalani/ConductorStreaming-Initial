@@ -8,6 +8,7 @@ import java.util.Properties;
 
 /**
  * Created by anihalani on 5/29/15.
+ * JDBC class to create and manage the JDBC Connection
  */
 public class JDBCConnection {
     public static final Properties properties = Util.readProperties(Util.PROPS_FILE);
@@ -29,7 +30,7 @@ public class JDBCConnection {
             // Handle errors for JDBC
             // Handle errors for Class.forName
             System.out.println("Exception in JDBCConnection.getConnection");
-            throw new RuntimeException("Unable to create a connection using Class.forName(JDBC_DRIVER) in JDBC.getConnection ");
+            throw new RuntimeException("Unable to create a connection using Class.forName(JDBC_DRIVER) in JDBC.getConnection ", e);
         }
     }
 }
