@@ -10,7 +10,8 @@ import streaming.APIPathBuilder;
 import streaming.StreamBuilder;
 import utils.Util;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -162,6 +163,8 @@ public class APIDataDumper {
                     webPropertyRankReportUrl = pathBuilder.addEndPointWithValue(webPropertyRankReportUrl,
                             "rank-sources", Integer.toString(rs.getInt("rank_source_id")));
 
+                    writeSearchVolumeData(webPropertyRankReportUrl);
+
                     webPropertyRankReportUrl = webPropertyRankReportUrl.concat("/tp/CURRENT/serp-items");
 
                     webPropertyRankReportUrl = pathBuilder.addKeyAndSignature(webPropertyRankReportUrl);
@@ -185,6 +188,18 @@ public class APIDataDumper {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Gets data from the searchVolume Endpoint of the API
+     * 
+     * @param urlPath
+     *            - The url Path containing the accountId, webPropertyId and rankSourceId
+     */
+    private void writeSearchVolumeData(String urlPath) {
+        String webPropertySearchVolumeUrl = urlPath.concat("/tp/CURRENT/search-volumes");
+        webPropertySearchVolumeUrl = pathBuilder.addKeyAndSignature(webPropertySearchVolumeUrl);
+        writeObjects(webPropertySearchVolumeUrl, ClientWebPropertySearchVolumeReport.class);
     }
 
     /**
@@ -223,12 +238,20 @@ public class APIDataDumper {
                 } else if (object instanceof TrackedSearch) {
                     ((TrackedSearch) object).setWebPropertyId(getWebPropertyIdFromUrl(url));
                     dao.writeToDatabase(object);
+                } else if (object instanceof ClientWebPropertySearchVolumeReport) {
+                    for (VolumeItem volumeItem : ((ClientWebPropertySearchVolumeReport) object).getVolumeItems()) {
+                        volumeItem.setTrackedSearchId(((ClientWebPropertySearchVolumeReport) object)
+                                .getTrackedSearchId());
+                        dao.writeToDatabase(volumeItem);
+                    }
+                    dao.writeToDatabase(object);
                 } else {
                     dao.writeToDatabase(object);
                 }
             }
         } catch (Exception e) {
             System.out.println("Error in writeObjects");
+            e.printStackTrace();
             System.out.println(url);
         } finally {
             try {

@@ -3,8 +3,8 @@ package streaming;
 import utils.Util;
 
 /**
- * Created by anihalani on 5/31/15.
- * APIPathBuilder class to generate the URL, manage endpoints and other parameters of the URL
+ * Created by anihalani on 5/31/15. APIPathBuilder class to generate the URL, manage endpoints and other parameters of
+ * the URL
  */
 public class APIPathBuilder {
     private String baseUrl;
@@ -17,7 +17,8 @@ public class APIPathBuilder {
      * Builds and return a complete url including the api baseUrl, endpoint paramter, apiKey and the Shared secret
      * 
      * @return The complete usable API url with apiKey and Signature
-     * @param completeUrl - Url with all the endpoints and correspoinding values
+     * @param completeUrl
+     *            - Url with all the endpoints and correspoinding values
      */
     public String addKeyAndSignature(String completeUrl) {
         return Util.generateRecoServiceUrl(completeUrl);
